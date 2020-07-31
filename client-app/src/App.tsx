@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import axios from 'axios'
+import { Header, Icon } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
 class App extends Component {
 
   state = {
@@ -10,28 +11,46 @@ class App extends Component {
   }
   
   componentDidMount() {
-    this.setState({
-      values: [{id: 1, name: 'Value 101'}, {id: 2, name: 'Value 102'}]
+    axios.get('http://localhost:5000/api/values')
+    .then((Response) => {
+     
+      this.setState({ values: Response.data})
     })
+/*     this.setState({
+      values: [{id: 1, name: 'Value 101'}, {id: 2, name: 'Value 102'}]
+    }) */
 
   }
 
   render(){
     return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <Header as='h2' icon>
+        <Icon name='users' />
+        Reactivities
+        <Header.Subheader>
+          Just got this here icon
+        </Header.Subheader>
+      </Header>
+
+
+      <List>
+      {this.state.values.map((value: any) => (
+                <List.Item key={value.id}> {value.name}</List.Item>
+              ))}
+      </List>
+
 
         <ul>
 
           {this.state.values.map((value: any) => (
-            <li>{value.name}</li>
+            <li key={value.id}>{value.name}</li>
           ))}
 
         </ul>
 
 
-      </header>
+
     </div>
     )
   }
