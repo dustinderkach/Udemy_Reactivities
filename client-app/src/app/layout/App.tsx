@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Header, Icon } from 'semantic-ui-react'
 import { List } from 'semantic-ui-react'
 import { IActivity } from '../models/activity';
+import { NavBar } from '../../features/nav/NavBar';
 
 
 
@@ -20,13 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <Header as='h2' icon>
-        <Icon name='users' />
-        Reactivities
-        <Header.Subheader>
-          Just got this here icon
-        </Header.Subheader>
-      </Header>
+      <NavBar />
 
 
       <List>
