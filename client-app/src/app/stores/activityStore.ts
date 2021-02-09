@@ -9,7 +9,9 @@ import { IActivity } from '../models/activity';
 class ActivityStore{
     //@observable
     activities: IActivity[] = [];
+    selectedActivity: IActivity | undefined;
     loadingInitial = false;
+    editMode = false;
 
     //@action
     loadActivities = () => {
@@ -23,6 +25,11 @@ class ActivityStore{
             this.activities.push(activity);
           })
         }).finally(() => this.loadingInitial = false);
+    }
+
+    selectActivity = (id: string) => {
+      this.selectedActivity = this.activities.find(a => a.id === id);
+      this.editMode = false;
     }
 
     
